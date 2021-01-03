@@ -143,7 +143,7 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     ([mod], "Tab", lazy.spawn("rofi -show")),
 
     # Browser
-    ([mod], "n", lazy.spawn("brave")),
+    ([mod], "n", lazy.spawn("waterfox-current")),
 
     # Visual Code
     ([mod], "v", lazy.spawn("code-oss")),
@@ -180,6 +180,7 @@ groups = [
             Group("DEV", label=""),
             Group("NET", label="爵"),
             Group("FS", label=""),
+            Group("DOC", label=""),
             Group("SOCIAL", spawn=["station", "discord"], label=""),
             Group("MAIL", spawn=["mailspring"], label=""),
             Group("MEDIA", spawn=["spotify"], label="")
@@ -206,6 +207,7 @@ layout_conf = {
 
 layouts = [
     layout.MonadTall(**layout_conf),
+    layout.MonadWide(**layout_conf),
     layout.Matrix(columns=2, **layout_conf),
     # layout.Bsp(),
     # layout.Columns(),
