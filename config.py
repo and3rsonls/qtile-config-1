@@ -125,7 +125,7 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
 
     # Swap panes of split stack
     ([mod, "shift"], "space", lazy.layout.rotate()),
-
+    ([mod], "l", lazy.spawn("/home/jlgarridol/.config/qtile/scripts/save_screen.sh")),
     ([], 'XF86Back', lazy.screen.prev_group(skip_managed=True, )),
     ([], 'XF86Forward', lazy.screen.next_group(skip_managed=True, )),
     ([mod], 'XF86Back', lazy.screen.prev_group(skip_managed=True, )),
@@ -143,7 +143,7 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     ([mod], "Tab", lazy.spawn("rofi -show")),
 
     # Browser
-    ([mod], "n", lazy.spawn("waterfox-current")),
+    ([mod], "n", lazy.spawn("firefox")),
 
     # Visual Code
     ([mod], "v", lazy.spawn("code-oss")),
@@ -178,7 +178,8 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
 groups = [
             Group("TERM", label="", spawn=["alacritty"]*3),
             Group("DEV", label=""),
-            Group("NET", label="爵"),
+            Group("NET", spawn=["firefox startpage.com"], label="爵"),
+            Group("UBU", label="拾"),
             Group("FS", label=""),
             Group("DOC", label=""),
             Group("SOCIAL", spawn=["station", "discord"], label=""),
@@ -282,7 +283,7 @@ powerline_sep = {
 }
 
 pacman = {
-    'execute': 'alacritty',
+    'display_format': "{updates}",
     'update_interval': 1800
 }
 
@@ -360,7 +361,7 @@ laptop_widgets = [
         fontsize=20,
         text='ﮮ'
     ),
-    widget.Pacman(
+    widget.CheckUpdates(
         **base(bg='red'),
         **pacman
     ),
@@ -396,26 +397,33 @@ monitor_widgets = [
        fontsize=20,
        text=''
     ),
-    widget.MemoryGraph(
-        **base(bg='red'),
-        graph_color=only_color("light"),
-        border_color=only_color("light"),
-        fill_color=only_color("light")+".3",
-        type="line"
-
+    #widget.MemoryGraph(
+    #    **base(bg='red'),
+    #    graph_color=only_color("light"),
+    #    border_color=only_color("light"),
+    #    fill_color=only_color("light")+".3",
+    #    type="line"
+    #
+    #),
+    widget.Memory(
+	**base(bg='red'),
+	format='{MemUsed}'
     ),
     widget.TextBox(
        **base(bg='red'),
        fontsize=20,
        text='﬙'
     ),
-    widget.CPUGraph(
-        **base(bg='red'),
-        graph_color=only_color("light"),
-        border_color=only_color("light"),
-        fill_color=only_color("light")+".3",
-        type="line"
-
+    #widget.CPUGraph(
+    #    **base(bg='red'),
+    #    graph_color=only_color("light"),
+    #    border_color=only_color("light"),
+    #    fill_color=only_color("light")+".3",
+    #    type="line"
+    #),
+    widget.CPU(
+	**base(bg='red'),
+	format="{load_percent}%"
     ),
     widget.TextBox(
         **base(fg='violet', bg='red'),
